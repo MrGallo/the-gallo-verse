@@ -96,6 +96,7 @@ triy1 = 190
 triy2 = 290
 ryan_closed = True
 # ---------
+
 # Conditional Variables
 daniel_scan = False
 daniel_blink = False
@@ -159,7 +160,18 @@ font_lucas = pygame.font.SysFont('Raider', 50)
 text_lucas = font_lucas.render("Lucas P is the Best", True, (0, 0, 0))
 text_lucas_x = 160
 text_lucas_y = 100
-
+# ---------
+WIDTH = 640
+HEIGHT = 480
+x = 0
+y = 0
+width = 640
+height = 480
+star_lilia_x = x + 206
+star_lilia_y = y + 206
+lilia_i = 0
+star_i = 0  
+#-----------
 
 running = True
 while running:
@@ -609,7 +621,53 @@ while running:
         text_gallo.get_width() * text_scale_gallo, text_gallo.get_height() * text_scale_gallo))
     screen.blit(scaled_text,
                 (x + width // 2 - scaled_text.get_width() // 2, y + height // 2 - scaled_text.get_height() // 2))
+# ----------------------------------------------------------------------------------------
 
+    lilia_i += 15
+    if lilia_i > 300:
+        lilia_i = 0
+
+    # Update the row of stars
+    star_i += 15
+    if star_i > WIDTH:
+        star_i = 0
+    # Rather than screen.fill, draw a rectangle
+    screen.fill((0, 0, 0))
+
+    #ARTWORK NAME: sleep paralysis
+    # Draw the row of stars
+    for i in range(0, WIDTH, 50):
+        star_points = [
+            (206 + i, 186),
+            (213 + i, 171),
+            (228 + i, 170),
+            (218 + i, 160),
+            (223 + i, 145),
+            (206 + i, 152),
+            (189 + i, 145),
+            (194 + i, 160),
+            (184 + i, 170),
+            (199 + i, 171)
+        ]
+        pygame.draw.polygon(screen, (254, 255, 227), star_points)
+
+    # Draw the moving star
+    star_points = [
+        (206 + lilia_i, 186 + lilia_i),
+        (213 + lilia_i, 171 + lilia_i),
+        (228 + lilia_i, 170 + lilia_i),
+        (218 + lilia_i, 160 + lilia_i),
+        (223 + lilia_i, 145 + lilia_i),
+        (206 + lilia_i, 152 + lilia_i),
+        (189 + lilia_i, 145 + lilia_i),
+        (194 + lilia_i, 160 + lilia_i),
+        (184 + lilia_i, 170 + lilia_i),
+        (199 + lilia_i, 171 + lilia_i)
+    ]
+    pygame.draw.polygon(screen, (254, 255, 227), star_points)
+
+    # ----------------------------------------------------------------------------------------
+    
     # LEAVE HERE --------------------------------------------
     screen_width, screen_height = screen.get_size()
     scaled_screen = pygame.transform.scale(screen, (int(screen_width * scale), int(screen_height * scale)))
