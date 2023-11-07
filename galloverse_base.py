@@ -93,7 +93,7 @@ while running:
 
     # INSERT YOUR LOOP CODE BELOW HERE  -----------------
 
-    # Blah
+    # Blah blah
 
     # ------------------LOOP CODE ABOVE HERE ^^ ---------
 
