@@ -126,6 +126,13 @@ daniel_eyelid_front_y = daniel_eyelid_back_y + 10
 daniel_pupil_radius = 150
 daniel_pupil_x = (640 - daniel_pupil_radius) / 2
 daniel_pupil_y = (480 - daniel_pupil_radius) / 2
+# Moon Positions
+moon_x_hayden = 200
+inner_moon_x_hayden = 180
+inner_moon_x_hayden2 = 220
+moon_y_hayden = 50
+inner_moon_y_hayden = 65
+inner_moon_y_hayden2 = 25
 
 # ---------------------
 sun_x_anthony = 570
@@ -162,6 +169,15 @@ bomb_y_henry = 70 + y_location
 bomb_stopped_henry = False
 # ---------------------------------------------
 
+
+font_lucas = pygame.font.SysFont('Raider', 50)
+text_lucas = font_lucas.render("Lucas P is the Best", True, (0, 0, 0))
+text_lucas_x = 160
+text_lucas_y = 100
+# ----------------------
+circle_x_tren = 200
+circle_y_tren = 200
+direction_x = 1
 
 running = True
 while running:
@@ -457,6 +473,101 @@ while running:
 
         x_people_michael += 90
 
+    # -----------
+    x = 640 * 5
+    y = 480 * 4
+    width = 640
+    height = 480
+
+    # Moving Moon
+    moon_x_hayden += 6
+    inner_moon_x_hayden += 6
+    inner_moon_x_hayden2 += 6
+
+    # Background Code
+    pygame.draw.rect(screen, (0, 0, 140), (x, y, width, height))
+    pygame.draw.rect(screen, (5, 107, 5), (x, y + 400, width, height - 400))
+
+    for star in range (50):
+        star_x_hayden = random.randint(1, 640)
+        star_y_hayden = random.randint(1, 400)
+        pygame.draw.circle(screen, (225, 225, 5), (x + star_x_hayden, y + star_y_hayden), 3)
+
+    pygame.draw.circle(screen, (120, 120, 120), (x + moon_x_hayden, y + moon_y_hayden), 60)
+    # Code for the inner parts of moon
+    pygame.draw.circle(screen, (60, 60, 60), (x + inner_moon_x_hayden, y + inner_moon_y_hayden), 30)
+    pygame.draw.circle(screen, (60, 60, 60), (x + inner_moon_x_hayden2, y + inner_moon_y_hayden2), 18)
+    
+    # Code for building in back
+    pygame.draw.rect(screen, (40, 40, 40), (x + 450, y + 130, 130, 320))
+    pygame.draw.rect(screen, (40, 40, 40), (x + 40, y + 150, 130, 320))
+    
+    
+    # Code for buildings in front
+    pygame.draw.rect(screen, (20, 20, 20), (x + 480, y + 280, 70, 150))
+    pygame.draw.rect(screen, (20, 20, 20), (x + 560, y + 270, 70, 150))
+    pygame.draw.rect(screen, (20, 20, 20), (x + 80, y + 280, 70, 150))
+    pygame.draw.rect(screen, (20, 20, 20), (x + 0 , y + 270, 70, 150))
+    
+    # Code for person
+    pygame.draw.circle(screen, (0, 0, 0), (x + 320, y + 300), 30)
+    pygame.draw.rect(screen, (0, 0, 0), (x + 300, y + 325, 40, 75))
+    pygame.draw.rect(screen, (0, 0, 0), (x + 290, y + 340, 10, 30))
+    pygame.draw.polygon(screen, (0, 0, 0), [(x + 330, y + 330), (x + 350, y + 340), (x + 370, y + 300), (x + 360, y + 290)])
+
+    # Looping Moon
+    if moon_x_hayden > 640 - 60:
+        moon_x_hayden = 0
+        inner_moon_x_hayden = -20
+        inner_moon_x_hayden2 = 20
+    x = 1920
+    y = 1920
+    width = 640
+    height = 480
+    pygame.draw.rect(screen, (0, 0, 255), (x, y, width, height))
+    initial_bomb_x = x -  1900
+    
+    if not car_go_back:
+        car_lucas_x += 4
+        if car_lucas_x >= 400:
+            car_go_back = True
+    elif car_go_back:
+        car_lucas_x -= 4
+        car_go_back = True
+        if car_lucas_x <= 0:
+            car_go_back = False
+    
+    if sun_lucas_x <= 444:
+        sun_lucas_x += 4
+        sun_lucas_y -= 2
+    elif sun_lucas_x == 800:
+        sun_lucas_x = 0
+        sun_lucas_y = 350
+    else:
+        sun_lucas_x += 4
+        sun_lucas_y += 2
+
+    pygame.draw.rect(screen, (0, 0 , 0), ( x + car_lucas_x + 200, y + car_lucas_y, 100, 20))
+    pygame.draw.rect(screen, (20, 20 , 20), ( x + 50, y + 250, 100, 200))
+    pygame.draw.rect(screen, (20, 20 , 20), ( x + 500, y + 250, 100, 200))
+    pygame.draw.rect(screen, (20, 20 , 20), ( x + 300, y + 250, 100, 200))
+    pygame.draw.rect(screen, (0, 255 , 0), ( x + car_lucas_x, y + car_lucas_y, 200, 100))
+    pygame.draw.circle(screen, (0, 255, 0), (x + car_lucas_x + 50, y + car_lucas_y), 60)
+    pygame.draw.circle(screen, (200, 230, 0), (x + sun_lucas_x, y + sun_lucas_y), 60)
+    pygame.draw.rect(screen, (20, 20 , 20), ( x + 40, y + 250, 100, 200))
+    pygame.draw.rect(screen, (20, 80 , 20), ( x + 40, y + 420, 200, 50))
+    pygame.draw.rect(screen, (250, 250 , 250), ( x + 25, y + 50, 150, 50))
+    pygame.draw.rect(screen, (250, 250 , 250), ( x + 65, y + 30, 50, 50))
+    pygame.draw.rect(screen, (250, 250 , 250), ( x + 300, y + 50, 150, 50))
+    pygame.draw.rect(screen, (250, 250 , 250), ( x + 35, y + 30, 50, 50))
+    screen.blit(text_lucas, (x + text_lucas_x, y + text_lucas_y))
+
+    if car_lucas_x >= 90:
+        pygame.draw.circle(screen, (0, 0, 0), (x + bomb_lucas_x, y + bomb_lucas_y), 60)
+        bomb_lucas_x += 25
+        if bomb_lucas_x >= 2500:
+            bomb_lucas_x = initial_bomb_x
+
     #----------------------------
     x = 3200
     y = 1440
@@ -530,9 +641,41 @@ while running:
         if (x + rock_x_anthony) < (x + 540):
             pygame.draw.circle(screen, (225, 0, 0), (x + 540, y + 290), 50)
             pygame.draw.circle(screen, (225, 100, 0), (x + 540, y + 290), 30)
+    #in loop
+    x = 640
+    y = 1440
+    if circle_x_tren >= x + 300:
+        direction_x = -10
+    elif circle_x_tren <= x + 50:
+        direction_x = 10
+    circle_x_tren += direction_x    
     
+    stick_spawn = random.randrange(0, 640)
+    horizontal_stick_spawn = random.randrange(0, 480)   
+    
+    
+    pygame.draw.rect(screen, (0, 0, 0), (x, y, 640, 480))
+    
+    pygame.draw.circle(screen, (255, 255, 0), (x + circle_x_tren - 400, y + circle_y_tren), 35)
+    pygame.draw.rect(screen, (0, 0, 0), (x + circle_x_tren - 422, y + circle_y_tren + 3, 27, 39))
+    pygame.draw.rect(screen, (255, 0, 80), (x + circle_x_tren - 420, y + circle_y_tren + 5, 23, 35))
+    pygame.draw.circle(screen, (0, 0, 0), (x + circle_x_tren - 420, y + circle_y_tren - 5), 5)
+    pygame.draw.circle(screen, (0, 0, 0), (x + circle_x_tren - 395, y + circle_y_tren - 5), 5)
+    pygame.draw.rect(screen, (0, 0, 0), (x + circle_x_tren - 440, y + circle_y_tren - 50, 80, 10))
+    pygame.draw.rect(screen, (0, 0, 0), (x + circle_x_tren - 440, y + circle_y_tren - 50, 80, 10))
+    pygame.draw.rect(screen, (255, 0, 0), (x + circle_x_tren - 438, y + circle_y_tren - 48, 76, 6))
+    pygame.draw.rect(screen, (165, 42, 42), (x + stick_spawn, y, 10, 100))
+    pygame.draw.rect(screen, (0, 255, 255), (x + stick_spawn, y + 100, 10, 380))
+    pygame.draw.rect(screen, (165, 42, 42), (x, y + horizontal_stick_spawn, 100, 10))
+    pygame.draw.rect(screen, (255, 0, 0), (x + 100, y + horizontal_stick_spawn, 540, 10))
+    
+
+
+
     # ----------------------------------------------------------------------------------------
 
+
+    
     # Must have these coordinates
     x = 1920
     y = 1440
@@ -589,7 +732,7 @@ while running:
         x_henry = 0
         bomb_stopped_henry = False
     # ------------------------------------------------------
-    
+
 
     # LEAVE HERE --------------------------------------------
     screen_width, screen_height = screen.get_size()
