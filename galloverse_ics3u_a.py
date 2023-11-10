@@ -65,8 +65,10 @@ ghost_y_maggie = 200
 
 switch_maggie = "right"
 
-# ----------------------
 
+
+
+# -----
 duncan_glow_x, duncan_glow_y, duncan_glow_radius = 315, 220, 70
 duncan_vignette_x, duncan_vignette_y, duncan_vignette_radius = 320, 240, 250
 
@@ -92,7 +94,8 @@ flash_interval = 500
 growrate = 5
 sizeilia = 150
 
-# ------------------
+# Testing 123
+
 
 
 running = True
