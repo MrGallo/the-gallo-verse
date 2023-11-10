@@ -1,8 +1,9 @@
 # pygame template
 import math
 import random
-import pygame
 import time
+
+import pygame
 
 
 def linear_interpolation(x, x0, x1, y0, y1):
@@ -83,8 +84,8 @@ oscar_shell_v_y = oscar_shell_v_y_original
 
 oscar_shell_fired = False
 oscar_player_controlled = False
-spawned_explosions = {}
-explosion_duration = 5000
+oscar_spawned_explosions = {}
+oscar_explosion_duration = 5000
 oscar_last_auto_fire = 0
 
 # -------------------
@@ -339,6 +340,7 @@ while running:
     pygame.draw.ellipse(screen, (255, 255, 255), (ryan_x + 485, ryan_y + 227.5, 25, 25))
     pygame.draw.ellipse(screen, (255, 255, 255), (ryan_x + 560, ryan_y + 227.5, 25, 25))
 
+    # -----------
     x = 1280
     y = 960
     width = 640
@@ -353,14 +355,11 @@ while running:
     while x_trees_michael < 672:
         pygame.draw.rect(screen, (139, 69, 19), (x + x_trees_michael + 0, y + 230, 20, 50))
         pygame.draw.polygon(screen, (0, 140, 0), (
-            (x + x_trees_michael - 19, y + 240), (x + x_trees_michael + 16, y + 122),
-            (x + x_trees_michael + 39, y + 237)))
+        (x + x_trees_michael - 19, y + 240), (x + x_trees_michael + 16, y + 122), (x + x_trees_michael + 39, y + 237)))
         pygame.draw.polygon(screen, (0, 150, 0), (
-            (x + x_trees_michael - 19, y + 220), (x + x_trees_michael + 16, y + 102),
-            (x + x_trees_michael + 39, y + 227)))
+        (x + x_trees_michael - 19, y + 220), (x + x_trees_michael + 16, y + 102), (x + x_trees_michael + 39, y + 227)))
         pygame.draw.polygon(screen, (0, 200, 0), (
-            (x + x_trees_michael - 19, y + 200), (x + x_trees_michael + 16, y + 92),
-            (x + x_trees_michael + 39, y + 217)))
+        (x + x_trees_michael - 19, y + 200), (x + x_trees_michael + 16, y + 92), (x + x_trees_michael + 39, y + 217)))
         x_trees_michael += 84
 
     x_people_michael = 0
@@ -371,8 +370,8 @@ while running:
         pygame.draw.circle(screen, (255, 20, 147), (x + 200 + x_people_michael, y + 202), 7)
         pygame.draw.circle(screen, (0, 25, 0), (x + 200 + x_people_michael, y + 202), 5)
         pygame.draw.polygon(screen, (240, 240, 240), (
-            (x + 200 + x_people_michael, y + 272), (x + 165 + x_people_michael, y + 222),
-            (x + 225 + x_people_michael, y + 222)))
+        (x + 200 + x_people_michael, y + 272), (x + 165 + x_people_michael, y + 222),
+        (x + 225 + x_people_michael, y + 222)))
         pygame.draw.rect(screen, (170, 170, 170), (x + 195 + x_people_michael, y + 222, 10, 51))
         y_button_michael = 0
         while y_button_michael < 40:
@@ -516,8 +515,8 @@ while running:
         moon_y_anthony = random.randrange(30, 451)
 
     pygame.draw.polygon(screen, (225, 0, 0), (
-        (x + rock_x_anthony + 2, y + rock_y_anthony - 12), (x + rock_x_anthony + 2, y + rock_y_anthony + 12),
-        (x + rock_x_anthony + 40, y + rock_y_anthony)))
+    (x + rock_x_anthony + 2, y + rock_y_anthony - 12), (x + rock_x_anthony + 2, y + rock_y_anthony + 12),
+    (x + rock_x_anthony + 40, y + rock_y_anthony)))
     pygame.draw.circle(screen, (56, 56, 56), (x + rock_x_anthony, y + rock_y_anthony), 15)
     if rock_x_anthony < 20:
         rock_x_anthony = 600
@@ -594,9 +593,9 @@ while running:
     screen.blit(bg_gallo, (x, y))
 
     screen.blit(welcome_text_gallo, (
-        x + width // 2 - welcome_text_gallo.get_width() // 2, y + height // 3 - welcome_text_gallo.get_height() // 2))
+    x + width // 2 - welcome_text_gallo.get_width() // 2, y + height // 3 - welcome_text_gallo.get_height() // 2))
     scaled_text = pygame.transform.scale(text_gallo, (
-        text_gallo.get_width() * text_scale_gallo, text_gallo.get_height() * text_scale_gallo))
+    text_gallo.get_width() * text_scale_gallo, text_gallo.get_height() * text_scale_gallo))
     screen.blit(scaled_text,
                 (x + width // 2 - scaled_text.get_width() // 2, y + height // 2 - scaled_text.get_height() // 2))
 
@@ -633,7 +632,7 @@ while running:
     if keys[pygame.K_b] and oscar_shell_fired:
         oscar_player_controlled = True
         oscar_shell_fired = False
-        spawned_explosions[(oscar_shell_x, oscar_shell_y)] = math.floor(time.time() * 1000)
+        oscar_spawned_explosions[(oscar_shell_x, oscar_shell_y)] = math.floor(time.time() * 1000)
 
     if oscar_shell_fired:
         oscar_shell_x += oscar_shell_v_x
@@ -652,7 +651,7 @@ while running:
             oscar_shell_fired = True
             oscar_last_auto_fire = time.time()
         if oscar_shell_fired and time.time() - oscar_last_auto_fire >= random.random():
-            spawned_explosions[(oscar_shell_x, oscar_shell_y)] = math.floor(time.time() * 1000)
+            oscar_spawned_explosions[(oscar_shell_x, oscar_shell_y)] = math.floor(time.time() * 1000)
             oscar_shell_fired = False
 
     # Rather than screen.fill, draw a rectangle
@@ -683,8 +682,8 @@ while running:
 
     to_be_erased = []
 
-    for explosion in spawned_explosions:
-        if math.floor(time.time() * 1000) - spawned_explosions[explosion] > explosion_duration:
+    for explosion in oscar_spawned_explosions:
+        if math.floor(time.time() * 1000) - oscar_spawned_explosions[explosion] > oscar_explosion_duration:
             to_be_erased.append(explosion)
             continue
         pygame.draw.circle(screen, (181, 114, 27), explosion, random.randint(50, 60))
@@ -692,7 +691,7 @@ while running:
         screen.blit(bombtext, (explosion[0], explosion[1] - 200))
 
     for erase in to_be_erased:
-        del spawned_explosions[erase]
+        del oscar_spawned_explosions[erase]
 
     text = font.render('Oscar\'s Tile: U/D/L/R = arrow keys', True, (0, 0, 0))
     text2 = font.render('Fire = SPACE | Reset = R | Detonate = B', True, (0, 0, 0))
