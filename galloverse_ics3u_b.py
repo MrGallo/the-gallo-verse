@@ -143,6 +143,20 @@ rock_x_anthony = 600
 rock_y_anthony = random.randrange(20, 460)
 radius_fire = 1
 
+# ----- Lucas
+car_lucas_x = 50
+car_lucas_y = 380
+
+circle_palmar_x = 340
+circle_palmar_y = 440
+car_go_back = False
+
+bomb_lucas_x = 160
+bomb_lucas_y = 430
+
+sun_lucas_x = 0
+sun_lucas_y = 350
+
 # ------------- Henry Du --------------------
 x_henry_location = 640
 y_henry_location = 960
