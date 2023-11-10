@@ -144,6 +144,7 @@ rock_y_anthony = random.randrange(20, 460)
 radius_fire = 1
 
 # ----- Lucas
+colour_lucas = (0, 0, 255)
 car_lucas_x = 50
 car_lucas_y = 380
 
