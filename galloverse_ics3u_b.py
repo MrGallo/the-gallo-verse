@@ -189,6 +189,22 @@ ayda_text = ayda_font.render("I HAVE THE HIGH GROUND.", True, AYDA_RED, AYDA_SKY
 ayda_textRect = ayda_text.get_rect()
 ayda_textRect.topleft = (WIDTH // 2, HEIGHT // 2)
 # ------------------
+w_henry = 1
+bomb_henry = False
+h_henry = 0
+x_henry = 0
+y_henry = 0
+WIDTH_henry = 640
+HEIGHT_henry = 480
+
+rect_x_henry = 250
+rect_y_henry = 200
+circle_x_henry = 260
+circle_y_henry = 150
+bomb_x_henry = 262
+bomb_y_henry = 70
+bomb_stopped_henry = False
+# --------------------------------
 
 
 running = True
@@ -748,7 +764,54 @@ while running:
     screen.blit(welcome_text_gallo, (x + width//2 - welcome_text_gallo.get_width()//2, y + height//3 - welcome_text_gallo.get_height()//2))
     scaled_text = pygame.transform.scale(text_gallo, (text_gallo.get_width() * text_scale_gallo, text_gallo.get_height() * text_scale_gallo))
     screen.blit(scaled_text, (x + width//2 - scaled_text.get_width()//2, y + height//2 - scaled_text.get_height()//2))
+
+    # -----------------------------------------------------------------------------------
+    x = 0
+    y = 960
+
+    # Draw the background
+    pygame.draw.rect(screen, (135, 206, 235), (x , y, WIDTH_henry, HEIGHT_henry))
+
+    # Draw the shapes
+    pygame.draw.rect(screen, (150, 75, 0), (rect_x_henry + x + x_henry, rect_y_henry + 200 + y - y_henry, 20, 20))
+    pygame.draw.circle(screen, (138, 30, 30), (circle_x_henry + x + x_henry, circle_y_henry + 200 + y - y_henry), 30)
+    pygame.draw.rect(screen, (0, 0, 0), (rect_x_henry + x + 2 + x_henry, rect_y_henry + 200 + y - 20 - y_henry, 3, 20))
+    pygame.draw.rect(screen, (0, 0, 0), (rect_x_henry + x + 15 + x_henry, rect_y_henry + + 200 + y - 20 - y_henry, 3, 20))
+    pygame.draw.circle(screen, (255, 234, 0), (circle_x_henry + x - 180, circle_y_henry - 90 + y), 50)
+    pygame.draw.rect(screen, (1, 50, 32), (x , y + 400, WIDTH_henry, HEIGHT_henry - 400))
     
+    pygame.draw.rect(screen, (150, 21, 21), (x + rect_x_henry - 10, y + rect_y_henry - 50 + 200, 50, 50))
+    pygame.draw.polygon(screen, (84, 8, 8), [(240 + x, 151 + y + 200), (260 + x, 115 + y + 200), (288 + x, 151 + y + 200)])
+    pygame.draw.rect(screen, (217, 242, 29), (244 + x, 159 + y + 200, 10, 10))
+    pygame.draw.rect(screen, (217, 242, 29), (272 + x, 159 + y + 200, 10, 10))
+    pygame.draw.rect(screen, (0, 0, 0), (258 + x, 183 + y + 200, 10, 17))
+
+    y_henry += 4
+    x_henry += 3
+
+    if y_henry >= 310:
+        y_henry = 0
+    if y_henry == 160:
+        bomb_henry = True
+    if x_henry == 15 or x_henry == 12 or x_henry == 9 or x_henry == 6:
+        x_henry-= 6
+
+    if bomb_henry and not bomb_stopped_henry:
+        pygame.draw.circle(screen, (0, 0, 0), (bomb_x_henry + x, bomb_y_henry + 190 + y + h_henry), 5)
+        h_henry += 10        
+    if h_henry >= 160 and not bomb_stopped_henry:
+        pygame.draw.circle(screen, (236, 146, 55), (x + 260, y + 400), w_henry)
+        w_henry += 4
+        bomb_henry = False
+        if w_henry >= 100:
+            bomb_stopped_henry = True
+
+    if bomb_stopped_henry:
+        h_henry = 0
+        w_henry = 1
+        x_henry = 0
+        bomb_stopped_henry = False
+    # ---------------------------------------------------------------------------
 
 
     # LEAVE HERE --------------------------------------------
