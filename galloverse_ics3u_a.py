@@ -56,6 +56,9 @@ bg_gallo = pygame.Surface((640, 480))
 bg_gallo.blit(bg_gallo_large, (-500, -500))
 welcome_text_buffer = {}
 # ---------------------------
+# Putting my stuff here
+print("Hello")
+# ---------------------
 
 ghost_x_maggie = 0
 ghost_y_maggie = 200
