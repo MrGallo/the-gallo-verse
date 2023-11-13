@@ -939,8 +939,8 @@ while running:
     # ---------------------------------------------------------------------------------------
     # GAME STATE UPDATES
     # All game math and comparisons happen here
-    x = 1920
-    y = 1440
+    x = 2560
+    y = 480
     width = 640
     height = 480
     
@@ -986,10 +986,7 @@ while running:
     # ----------------------------------------------------------------------------------------
 
     # Must have these coordinates
-    x = 2560
-    y = 480
-    width = 640
-    height = 480
+   
     
     frames_gallo += 1
     text_scale_gallo = abs((math.sin(frames_gallo / 30) - 3) / 3)
