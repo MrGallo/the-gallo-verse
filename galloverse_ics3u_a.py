@@ -983,9 +983,8 @@ while running:
       pygame.draw.circle(screen, (255,255,255), (x + 555, y + 160), 60)
     pygame.draw.rect(screen, (aryagroundcolor), (x, y+360, width, 120))
 
-    # ----------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
-    # Must have these coordinates
    
     
     frames_gallo += 1
