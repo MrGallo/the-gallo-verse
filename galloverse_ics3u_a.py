@@ -772,26 +772,6 @@ while running:
     #Space Ship
     pygame.draw.polygon(screen, (tri_r_lam, tri_g_lam, tri_b_lam), [(x+tri_x_lam, y+tri_y_lam+150), (x+tri_x_lam, y+tri_y_lam+200), (x+tri_x_lam+100, y+tri_y_lam+175)])
     
-        
-    # ----------------------------------------------------------------------------------------
-
-    # Must have these coordinates
-    x = 1920
-    y = 1440
-    width = 640
-    height = 480
-
-    frames_gallo += 1
-    text_scale_gallo = abs((math.sin(frames_gallo / 30) - 3) / 3)
-    
-
-    # Rather than screen.fill, draw a rectangle
-    screen.blit(bg_gallo, (x, y))
-
-    screen.blit(welcome_text_gallo, (x + width//2 - welcome_text_gallo.get_width()//2, y + height//3 - welcome_text_gallo.get_height()//2))
-    scaled_text = pygame.transform.scale(text_gallo, (text_gallo.get_width() * text_scale_gallo, text_gallo.get_height() * text_scale_gallo))
-    screen.blit(scaled_text, (x + width//2 - scaled_text.get_width()//2, y + height//2 - scaled_text.get_height()//2))
-
     # Christian -------------------------------------------------------------------------------------
     x = 3840
     y = 2880
@@ -854,8 +834,6 @@ while running:
         (x+350, y+229)
     ]
     pygame.draw.polygon(screen, (0, 0, 0), road_center_matros)
-
-
 
     # Car 1
     car_body_matros = [
@@ -957,17 +935,10 @@ while running:
     pygame.draw.polygon(screen, (255, 0, 0), b_car_backlight1)
     pygame.draw.polygon(screen, (255, 0, 0), b_car_backlight2)
     pygame.draw.polygon(screen, (0, 0, 99), b_car_windshield)
-#---------------------------------------------------------------
-    # Must have these coordinates
-    x = 1920
-    y = 1440
-    width = 640
-    height = 480
-
     
-  
-  # GAME STATE UPDATES
-  # All game math and comparisons happen here
+    # ---------------------------------------------------------------------------------------
+    # GAME STATE UPDATES
+    # All game math and comparisons happen here
     circle_x_arya += 10
   
     if circle_x_arya > width and aryacolor == (255,200,0):
@@ -1007,6 +978,24 @@ while running:
       pygame.draw.circle(screen, (255,255,255), (x + 555, y + 160), 60)
     pygame.draw.rect(screen, (aryagroundcolor), (x, y+360, width, 120))
 
+    # ----------------------------------------------------------------------------------------
+
+    # Must have these coordinates
+    x = 1920
+    y = 1440
+    width = 640
+    height = 480
+    
+    frames_gallo += 1
+    text_scale_gallo = abs((math.sin(frames_gallo / 30) - 3) / 3)
+    
+
+    # Rather than screen.fill, draw a rectangle
+    screen.blit(bg_gallo, (x, y))
+
+    screen.blit(welcome_text_gallo, (x + width//2 - welcome_text_gallo.get_width()//2, y + height//3 - welcome_text_gallo.get_height()//2))
+    scaled_text = pygame.transform.scale(text_gallo, (text_gallo.get_width() * text_scale_gallo, text_gallo.get_height() * text_scale_gallo))
+    screen.blit(scaled_text, (x + width//2 - scaled_text.get_width()//2, y + height//2 - scaled_text.get_height()//2))
 
     # LEAVE HERE --------------------------------------------
     screen_width, screen_height = screen.get_size()
