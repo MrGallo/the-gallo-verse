@@ -264,6 +264,12 @@ sidewalk_lines1 = 0
 sidewalk_lines2 = 0
 
 #-------------------
+circle_x_arya = 200
+circle_y_arya = 200
+aryacolor = (192,192,192)
+backgroundarya = (0,0,0)
+aryagroundcolor = (21,71,52)
+#-----------------------
 running = True
 while running:
     # GALLO VERSE SPECIFIC ----------------------------------------------------------------
@@ -951,6 +957,55 @@ while running:
     pygame.draw.polygon(screen, (255, 0, 0), b_car_backlight1)
     pygame.draw.polygon(screen, (255, 0, 0), b_car_backlight2)
     pygame.draw.polygon(screen, (0, 0, 99), b_car_windshield)
+#---------------------------------------------------------------
+    # Must have these coordinates
+    x = 1920
+    y = 1440
+    width = 640
+    height = 480
+
+    
+  
+  # GAME STATE UPDATES
+  # All game math and comparisons happen here
+    circle_x_arya += 10
+  
+    if circle_x_arya > width and aryacolor == (255,200,0):
+      circle_x_arya = 0
+      aryacolor = (192,192,192)
+      backgroundarya = (0,0,0)
+      aryagroundcolor = (21,71,52)
+      
+  
+    elif circle_x_arya > width and aryacolor == (192,192,192):
+        circle_x_arya = 0
+        aryacolor = (255,200,0)
+        backgroundarya = (135, 206, 235)
+        aryagroundcolor = (0,166,25)
+
+
+
+    # Rather than screen.fill, draw a rectangle
+    pygame.draw.rect(screen, (backgroundarya), (x, y, width, height))
+
+    # Must draw with reference to that coordinate
+    if backgroundarya == (0,0,0):
+        pygame.draw.circle(screen, (255,255,255), (x + 70, y + 50), 5)
+        pygame.draw.circle(screen, (255,255,255), (x + 100, y + 40), 5)
+        pygame.draw.circle(screen, (255,255,255), (x + 200, y + 70), 5)
+        pygame.draw.circle(screen, (255,255,255), (x + 360, y + 30), 5)
+    
+  
+
+    pygame.draw.circle(screen, (aryacolor), (x + circle_x_arya, y + circle_y_arya - 125), 50)
+    if backgroundarya == (135,206,235):
+      pygame.draw.circle(screen, (255,255,255), (x + 120, y + 100), 65)
+      pygame.draw.circle(screen, (255,255,255), (x + 80, y + 110), 60)
+      pygame.draw.circle(screen, (255,255,255), (x + 155, y + 110), 60)
+      pygame.draw.circle(screen, (255,255,255), (x + 520, y + 130), 65)
+      pygame.draw.circle(screen, (255,255,255), (x + 480, y + 160), 60)
+      pygame.draw.circle(screen, (255,255,255), (x + 555, y + 160), 60)
+    pygame.draw.rect(screen, (aryagroundcolor), (x, y+360, width, 120))
 
 
     # LEAVE HERE --------------------------------------------
