@@ -939,6 +939,11 @@ while running:
     # ---------------------------------------------------------------------------------------
     # GAME STATE UPDATES
     # All game math and comparisons happen here
+    x = 1920
+    y = 1440
+    width = 640
+    height = 480
+    
     circle_x_arya += 10
   
     if circle_x_arya > width and aryacolor == (255,200,0):
