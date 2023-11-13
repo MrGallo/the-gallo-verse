@@ -62,6 +62,33 @@ ghost_y_maggie = 200
 
 switch_maggie = "right"
 
+# ---------------------- Gab
+
+    x = 0
+    y = 0
+    width = 640
+    height = 480
+
+    bldg_x = 250
+    bldg_y = 40
+    bldg_width = 150
+    bldg_height = 260
+
+    sq_x = 310
+    sq_y = 250
+    sq_width = 30
+    sq_height = 50
+
+    House_x = 155
+    House_y = 200
+    House_width = 95
+    House_height = 100
+
+    House_x_2 = 400
+    House_y_2 = 200
+    House_width_2 = 95
+    House_height_2 = 100
+
 # ----------------------
 
 duncan_glow_x, duncan_glow_y, duncan_glow_radius = 315, 220, 70
@@ -428,8 +455,110 @@ while running:
     pygame.draw.circle(screen, (255, 255, 255), (x + ghost_x_maggie - 72, y + ghost_y_maggie + 115), 5)
     pygame.draw.circle(screen, (255, 255, 255), (x + ghost_x_maggie - 50, y + ghost_y_maggie + 115), 5)
 
+    # GAB -------------------
+    pygame.draw.rect(screen, (127, 190, 253), (x, y, width, height))
+    pygame.draw.ellipse(screen, (255, 255, 255), (50, 50, 100, 40))
+    pygame.draw.ellipse(screen, (255, 255, 255), (100, 70, 100, 40))
+    pygame.draw.ellipse(screen, (255, 255, 255), (150, 50, 100, 40))
+    pygame.draw.ellipse(screen, (255, 255, 255), (120, 30, 100, 40))
+    pygame.draw.ellipse(screen, (255, 255, 255), (180, 50, 100, 40))
+    pygame.draw.rect(screen, (0, 0, 0),(bldg_x, bldg_y, bldg_width, bldg_height))
+    pygame.draw.rect(screen, (255, 255, 255),(sq_x, sq_y, sq_width, sq_height))
 
+    grass_color = (34, 139, 34)  # Green color
+    pygame.draw.rect(screen, grass_color, (0, 300, 640, 180))
+    # House
+    pygame.draw.rect(screen, (0, 0, 0),(House_x, House_y, House_width, House_height))
+
+    # Roof
+    pygame.draw.polygon(screen, (0, 0, 0),[(House_x, House_y), (House_x + House_width, House_y),(House_x + House_width / 2, House_y - House_height / 2)])
+
+    # House
+    pygame.draw.rect(screen, (255, 255, 255),(House_x_2, House_y_2, House_width_2, House_height_2))
+
+    # Roof
+    pygame.draw.polygon(
+        screen, (255, 255, 255),[(House_x_2, House_y_2), (House_x_2 + House_width_2, House_y_2),(House_x_2 + House_width_2 / 2, House_y_2 - House_height_2 / 2)])
+
+    # Door
+    door_width = 30
+    door_height = 40
+    door_x = House_x + (House_width - door_width) / 2
+    door_y = House_y + (House_height - door_height)
+    pygame.draw.rect(screen, (255, 255, 255),(door_x, door_y, door_width, door_height))
+
+    door_width = 30
+    door_height = 40
+    door_x = House_x_2 + (House_width_2 - door_width) / 2
+    door_y = House_y_2 + (House_height_2 - door_height)
+    pygame.draw.rect(screen, (0, 0, 0),(door_x, door_y, door_width, door_height))
+
+    # Windows
+    window_width = 30
+    window_height = 30
+    window_x = 260
+    window_y = 60
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+     window_x = 310
+    window_y = 60
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 260
+    window_y = 100
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 310
+    window_y = 100
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 260
+    window_y = 140
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 310
+    window_y = 140
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 260
+    window_y = 180
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 310
+    window_y = 180
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 170
+    window_y = 220
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
+    window_x = 215
+    window_y = 220
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
+
+    window_x = 355
+    window_y = 60
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 355
+    window_y = 100
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 355
+    window_y = 140
+    pygame.draw.rect(screen, (225, 165, 1), (window_x, window_y, window_width, window_height))
+
+    window_x = 355
+    window_y = 180
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+    # House 2
+    window_x = 415
+    window_y = 220
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
+    window_x = 460
+    window_y = 220
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
+    #------------------------
     # DUNCAN -------------------------------
+
 
     x = 3200
     y = 960
@@ -766,6 +895,26 @@ while running:
     #Space Ship
     pygame.draw.polygon(screen, (tri_r_lam, tri_g_lam, tri_b_lam), [(x+tri_x_lam, y+tri_y_lam+150), (x+tri_x_lam, y+tri_y_lam+200), (x+tri_x_lam+100, y+tri_y_lam+175)])
     
+        
+    # ----------------------------------------------------------------------------------------
+
+    # Must have these coordinates
+    x = 1920
+    y = 1440
+    width = 640
+    height = 480
+
+    frames_gallo += 1
+    text_scale_gallo = abs((math.sin(frames_gallo / 30) - 3) / 3)
+    
+
+    # Rather than screen.fill, draw a rectangle
+    screen.blit(bg_gallo, (x, y))
+
+    screen.blit(welcome_text_gallo, (x + width//2 - welcome_text_gallo.get_width()//2, y + height//3 - welcome_text_gallo.get_height()//2))
+    scaled_text = pygame.transform.scale(text_gallo, (text_gallo.get_width() * text_scale_gallo, text_gallo.get_height() * text_scale_gallo))
+    screen.blit(scaled_text, (x + width//2 - scaled_text.get_width()//2, y + height//2 - scaled_text.get_height()//2))
+
     # Christian -------------------------------------------------------------------------------------
     x = 3840
     y = 2880
@@ -828,6 +977,8 @@ while running:
         (x+350, y+229)
     ]
     pygame.draw.polygon(screen, (0, 0, 0), road_center_matros)
+
+
 
     # Car 1
     car_body_matros = [
@@ -929,25 +1080,6 @@ while running:
     pygame.draw.polygon(screen, (255, 0, 0), b_car_backlight1)
     pygame.draw.polygon(screen, (255, 0, 0), b_car_backlight2)
     pygame.draw.polygon(screen, (0, 0, 99), b_car_windshield)
-    
-    # ----------------------------------------------------------------------------------------
-
-    # Must have these coordinates
-    x = 1920
-    y = 1440
-    width = 640
-    height = 480
-
-    frames_gallo += 1
-    text_scale_gallo = abs((math.sin(frames_gallo / 30) - 3) / 3)
-    
-
-    # Rather than screen.fill, draw a rectangle
-    screen.blit(bg_gallo, (x, y))
-
-    screen.blit(welcome_text_gallo, (x + width//2 - welcome_text_gallo.get_width()//2, y + height//3 - welcome_text_gallo.get_height()//2))
-    scaled_text = pygame.transform.scale(text_gallo, (text_gallo.get_width() * text_scale_gallo, text_gallo.get_height() * text_scale_gallo))
-    screen.blit(scaled_text, (x + width//2 - scaled_text.get_width()//2, y + height//2 - scaled_text.get_height()//2))
 
 
     # LEAVE HERE --------------------------------------------
