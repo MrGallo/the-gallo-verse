@@ -89,107 +89,6 @@ switch_maggie = "right"
     House_width_2 = 95
     House_height_2 = 100
 
-pygame.draw.rect(screen, (127, 190, 253), (x, y, width, height))
-    pygame.draw.ellipse(screen, (255, 255, 255), (50, 50, 100, 40))
-    pygame.draw.ellipse(screen, (255, 255, 255), (100, 70, 100, 40))
-    pygame.draw.ellipse(screen, (255, 255, 255), (150, 50, 100, 40))
-    pygame.draw.ellipse(screen, (255, 255, 255), (120, 30, 100, 40))
-    pygame.draw.ellipse(screen, (255, 255, 255), (180, 50, 100, 40))
-    pygame.draw.rect(screen, (0, 0, 0),(bldg_x, bldg_y, bldg_width, bldg_height))
-    pygame.draw.rect(screen, (255, 255, 255),(sq_x, sq_y, sq_width, sq_height))
-
-    grass_color = (34, 139, 34)  # Green color
-    pygame.draw.rect(screen, grass_color, (0, 300, 640, 180))
-    # House
-    pygame.draw.rect(screen, (0, 0, 0),(House_x, House_y, House_width, House_height))
-
-    # Roof
-    pygame.draw.polygon(screen, (0, 0, 0),[(House_x, House_y), (House_x + House_width, House_y),(House_x + House_width / 2, House_y - House_height / 2)])
-
-    # House
-    pygame.draw.rect(screen, (255, 255, 255),(House_x_2, House_y_2, House_width_2, House_height_2))
-
-    # Roof
-    pygame.draw.polygon(
-        screen, (255, 255, 255),[(House_x_2, House_y_2), (House_x_2 + House_width_2, House_y_2),(House_x_2 + House_width_2 / 2, House_y_2 - House_height_2 / 2)])
-
-    # Door
-    door_width = 30
-    door_height = 40
-    door_x = House_x + (House_width - door_width) / 2
-    door_y = House_y + (House_height - door_height)
-    pygame.draw.rect(screen, (255, 255, 255),(door_x, door_y, door_width, door_height))
-
-    door_width = 30
-    door_height = 40
-    door_x = House_x_2 + (House_width_2 - door_width) / 2
-    door_y = House_y_2 + (House_height_2 - door_height)
-    pygame.draw.rect(screen, (0, 0, 0),(door_x, door_y, door_width, door_height))
-
-    # Windows
-    window_width = 30
-    window_height = 30
-    window_x = 260
-    window_y = 60
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-     window_x = 310
-    window_y = 60
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-
-    window_x = 260
-    window_y = 100
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-
-    window_x = 310
-    window_y = 100
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-
-    window_x = 260
-    window_y = 140
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-
-    window_x = 310
-    window_y = 140
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-
-    window_x = 260
-    window_y = 180
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-
-    window_x = 310
-    window_y = 180
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-
-    window_x = 170
-    window_y = 220
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
-    window_x = 215
-    window_y = 220
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
-
-    window_x = 355
-    window_y = 60
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-
-    window_x = 355
-    window_y = 100
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-
-    window_x = 355
-    window_y = 140
-    pygame.draw.rect(screen, (225, 165, 1), (window_x, window_y, window_width, window_height))
-
-    window_x = 355
-    window_y = 180
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
-    # House 2
-    window_x = 415
-    window_y = 220
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
-    window_x = 460
-    window_y = 220
-    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
-
 # ----------------------
 
 duncan_glow_x, duncan_glow_y, duncan_glow_radius = 315, 220, 70
@@ -556,8 +455,110 @@ while running:
     pygame.draw.circle(screen, (255, 255, 255), (x + ghost_x_maggie - 72, y + ghost_y_maggie + 115), 5)
     pygame.draw.circle(screen, (255, 255, 255), (x + ghost_x_maggie - 50, y + ghost_y_maggie + 115), 5)
 
+    # GAB -------------------
+    pygame.draw.rect(screen, (127, 190, 253), (x, y, width, height))
+    pygame.draw.ellipse(screen, (255, 255, 255), (50, 50, 100, 40))
+    pygame.draw.ellipse(screen, (255, 255, 255), (100, 70, 100, 40))
+    pygame.draw.ellipse(screen, (255, 255, 255), (150, 50, 100, 40))
+    pygame.draw.ellipse(screen, (255, 255, 255), (120, 30, 100, 40))
+    pygame.draw.ellipse(screen, (255, 255, 255), (180, 50, 100, 40))
+    pygame.draw.rect(screen, (0, 0, 0),(bldg_x, bldg_y, bldg_width, bldg_height))
+    pygame.draw.rect(screen, (255, 255, 255),(sq_x, sq_y, sq_width, sq_height))
 
+    grass_color = (34, 139, 34)  # Green color
+    pygame.draw.rect(screen, grass_color, (0, 300, 640, 180))
+    # House
+    pygame.draw.rect(screen, (0, 0, 0),(House_x, House_y, House_width, House_height))
+
+    # Roof
+    pygame.draw.polygon(screen, (0, 0, 0),[(House_x, House_y), (House_x + House_width, House_y),(House_x + House_width / 2, House_y - House_height / 2)])
+
+    # House
+    pygame.draw.rect(screen, (255, 255, 255),(House_x_2, House_y_2, House_width_2, House_height_2))
+
+    # Roof
+    pygame.draw.polygon(
+        screen, (255, 255, 255),[(House_x_2, House_y_2), (House_x_2 + House_width_2, House_y_2),(House_x_2 + House_width_2 / 2, House_y_2 - House_height_2 / 2)])
+
+    # Door
+    door_width = 30
+    door_height = 40
+    door_x = House_x + (House_width - door_width) / 2
+    door_y = House_y + (House_height - door_height)
+    pygame.draw.rect(screen, (255, 255, 255),(door_x, door_y, door_width, door_height))
+
+    door_width = 30
+    door_height = 40
+    door_x = House_x_2 + (House_width_2 - door_width) / 2
+    door_y = House_y_2 + (House_height_2 - door_height)
+    pygame.draw.rect(screen, (0, 0, 0),(door_x, door_y, door_width, door_height))
+
+    # Windows
+    window_width = 30
+    window_height = 30
+    window_x = 260
+    window_y = 60
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+     window_x = 310
+    window_y = 60
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 260
+    window_y = 100
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 310
+    window_y = 100
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 260
+    window_y = 140
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 310
+    window_y = 140
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 260
+    window_y = 180
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 310
+    window_y = 180
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 170
+    window_y = 220
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
+    window_x = 215
+    window_y = 220
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
+
+    window_x = 355
+    window_y = 60
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 355
+    window_y = 100
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+
+    window_x = 355
+    window_y = 140
+    pygame.draw.rect(screen, (225, 165, 1), (window_x, window_y, window_width, window_height))
+
+    window_x = 355
+    window_y = 180
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width, window_height))
+    # House 2
+    window_x = 415
+    window_y = 220
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
+    window_x = 460
+    window_y = 220
+    pygame.draw.rect(screen, (225, 165, 1),(window_x, window_y, window_width - 10, window_height - 10))
+    #------------------------
     # DUNCAN -------------------------------
+
 
     x = 3200
     y = 960
