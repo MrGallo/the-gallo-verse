@@ -225,6 +225,26 @@ bomb_y_henry = 70
 bomb_stopped_henry = False
 # -----------------------------------
 
+x_tpan = 2560
+y_tpan = 1920
+width_tpan = 640
+height_tpan = 480
+size_tpan = (width_tpan, height_tpan)
+r_color_tpan = random.randrange(0,256)
+g_color_tpan = random.randrange(0,256)
+b_color_tpan = random.randrange(0,256)
+r_color_change_tpan = 20
+
+black_tpan = (0, 0, 0)
+
+ball_tpan = pygame.draw.circle(
+    surface=screen, color=black_tpan, center=[100+x_tpan, 100+y_tpan], radius=40)
+speed_x_tpan = random.randrange(25,41)
+speed_y_tpan = random.randrange(45,51)
+speed_tpan = [speed_x_tpan,speed_y_tpan]
+
+
+# -----------------------------------
 
 
 running = True
@@ -924,6 +944,45 @@ while running:
         x_henry = 0
         bomb_stopped_henry = False
     # ---------------------------------------------------------------------------
+
+    
+    animating=True 
+    while animating:
+        clock.tick(60)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                animating = False
+
+        r_color_tpan += r_color_change_tpan
+        if r_color_tpan > 255 or r_color_tpan < 0:
+            r_color_change_tpan *= -1
+        r_color_tpan = max(0, min(255, r_color_tpan))
+
+        g_color_tpan += r_color_change_tpan
+        if g_color_tpan > 255 or g_color_tpan < 0:
+            r_color_change_tpan *= -1
+        g_color_tpan = max(0, min(255, g_color_tpan))
+
+        b_color_tpan += r_color_change_tpan
+        if b_color_tpan > 255 or b_color_tpan < 0:
+            r_color_change_tpan *= -1
+        b_color_tpan = max(0, min(255, b_color_tpan))
+
+        pygame.draw.rect(screen, (r_color_tpan, g_color_tpan, b_color_tpan), (x_tpan, y_tpan, width_tpan, height_tpan))
+        pygame.display.flip()
+
+    ball_tpan = ball_tpan.move(speed_tpan)
+    if ball_tpan.left <= 0 + x_tpan or ball_tpan.right >= width_tpan + x_tpan:
+        speed_tpan[0] = -speed_tpan[0]
+    if ball_tpan.top <= 0 + y_tpan or ball_tpan.bottom >= height_tpan + y_tpan:
+        speed_tpan[1] = -speed_tpan[1]
+
+
+    pygame.draw.circle(surface=screen, color=black_tpan,
+                       center=ball_tpan.center, radius=40)
+
+    # ---------------------------------------------------------------------------
+                   
     x = 640 * 5 
     y = 480 * 1 
     width = 640
