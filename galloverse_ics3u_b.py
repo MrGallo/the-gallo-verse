@@ -758,7 +758,11 @@ while running:
     pygame.draw.rect(screen, (0, 255, 255), (x + stick_spawn, y + 100, 10, 380))
     pygame.draw.rect(screen, (165, 42, 42), (x, y + horizontal_stick_spawn, 100, 10))
     pygame.draw.rect(screen, (255, 0, 0), (x + 100, y + horizontal_stick_spawn, 540, 10))
-    
+
+    tren_grass = x
+    while tren_grass < 1280:
+        pygame.draw.rect(screen, (0, 80, 30), (tren_grass, y + 450, 1, 30))
+        tren_grass += 2
     #-----------------------------------------------------------------------------------------
 
     if circle_y_gloria <= gloria_y + 190:
