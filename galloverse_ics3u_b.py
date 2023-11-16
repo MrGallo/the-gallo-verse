@@ -86,7 +86,7 @@ oscar_shell_v_y = oscar_shell_v_y_original
 oscar_shell_fired = False
 oscar_player_controlled = False
 oscar_spawned_explosions = {}
-oscar_explosion_duration = 5000
+oscar_explosion_duration = 3000
 oscar_last_auto_fire = 0
 
 # -------------------
@@ -748,7 +748,7 @@ while running:
     if not oscar_player_controlled:
         tank_x_oscar += random.randint(-5, 5)
         tank_y_oscar += random.randint(-5, 5)
-        if random.random() > 0.97:
+        if random.random() > 0.99 and not oscar_shell_fired:
             oscar_shell_fired = True
             oscar_last_auto_fire = time.time()
         if oscar_shell_fired and time.time() - oscar_last_auto_fire >= random.random():
