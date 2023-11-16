@@ -224,7 +224,20 @@ bomb_x_henry = 262
 bomb_y_henry = 70
 bomb_stopped_henry = False
 # -----------------------------------
+x_tpan = 2560
+y_tpan = 1920
+width_tpan = 640
+height_tpan = 480
+size_tpan = (width_tpan, height_tpan)
 
+red_tpan = (255, 0, 0)
+
+ball_tpan = pygame.draw.circle(
+    surface=screen, color=red_tpan, center=[100+x_tpan, 100+y_tpan], radius=40)
+speed_x_tpan = random.randrange(25,41)
+speed_y_tpan = random.randrange(45,51)
+speed_tpan = [speed_x_tpan,speed_y_tpan]
+# -------------------------------------
 
 
 running = True
@@ -1003,6 +1016,20 @@ while running:
             curd[1] = random.randint(-100, -10)
             curd[0] = random.randint(x + 155, x + 449)
     # ----------------------------------------------------------------------------------------
+    pygame.draw.rect(screen, (14, 77, 237), (x_tpan, y_tpan, width_tpan, height_tpan))
+
+    ball_tpan = ball_tpan.move(speed_tpan)
+    if ball_tpan.left <= 0 + x_tpan or ball_tpan.right >= width_tpan + x_tpan:
+        speed_tpan[0] = -speed_tpan[0]
+    if ball_tpan.top <= 0 + y_tpan or ball_tpan.bottom >= height_tpan + y_tpan:
+        speed_tpan[1] = -speed_tpan[1]
+
+
+    pygame.draw.circle(surface=screen, color=red_tpan,
+                       center=ball_tpan.center, radius=40)
+    # --------------------------------------------------------------------
+    
+    
     x = 1920
     y = 1440
     width = 640
