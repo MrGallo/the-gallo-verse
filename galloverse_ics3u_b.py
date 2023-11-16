@@ -307,6 +307,10 @@ while running:
                                                y + daniel_pupil_y, 
                                                 daniel_pupil_radius, 
                                                 daniel_pupil_radius))
+        for _ in range(5):
+            pygame.draw.circle(screen, (100, 0, 0), 
+                              (x + 340 - random.randint(0,40), 
+                               y + 300 - random.randint(0,40)), 9)
         if daniel_stare_count == 0:
             daniel_stare = False
             daniel_action_selection = True
