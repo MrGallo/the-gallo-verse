@@ -171,7 +171,16 @@ circle_x_tren = 200
 circle_y_tren = 200
 direction_x = 1
 
-# ----------------------
+#-------------------------------------
+gloria_x = 640
+gloria_y = 0
+gloria_width = 640
+gloria_height = 480
+circle_x_gloria = gloria_x
+circle_y_gloria = gloria_y 
+crash_gloria = False
+gloria_frames = 0
+#---------------------------------------------
 #ayda lava
 ayda_amplitude = 10
 ayda_frequency = 0.03
@@ -200,7 +209,26 @@ ellipse_x_adeline = 200
 ellipse_y_adeline = 50 
 line_x_adeline = 300 
 line_y_adeline = 215 
-    
+
+# ----------------------------------------
+w_henry = 1
+bomb_henry = False
+h_henry = 0
+x_henry = 0
+y_henry = 0
+WIDTH_henry = 640
+HEIGHT_henry = 480
+
+rect_x_henry = 250
+rect_y_henry = 200
+circle_x_henry = 260
+circle_y_henry = 150
+bomb_x_henry = 262
+bomb_y_henry = 70
+bomb_stopped_henry = False
+# -----------------------------------
+
+
 
 running = True
 while running:
@@ -649,6 +677,81 @@ while running:
     pygame.draw.rect(screen, (0, 255, 255), (x + stick_spawn, y + 100, 10, 380))
     pygame.draw.rect(screen, (165, 42, 42), (x, y + horizontal_stick_spawn, 100, 10))
     pygame.draw.rect(screen, (255, 0, 0), (x + 100, y + horizontal_stick_spawn, 540, 10))
+    
+    #-----------------------------------------------------------------------------------------
+
+    if circle_y_gloria <= gloria_y + 190:
+        circle_x_gloria += 1
+        circle_y_gloria += 2
+    print(gloria_frames)
+    gloria_frames += 1
+    if gloria_frames % 130 == 0:
+        circle_y_gloria = gloria_y
+        circle_x_gloria = gloria_x
+        crash_gloria = False
+
+    pygame.draw.rect(screen, (255, 255, 255), (gloria_x, gloria_y, gloria_width, gloria_height))
+    pygame.draw.rect(screen, (0, 0, 0), (gloria_x, gloria_y, gloria_width, gloria_height), 7)
+
+    pygame.draw.circle(screen, (251, 236, 93), (circle_x_gloria, circle_y_gloria), 30)
+    pygame.draw.circle(screen, (255, 0, 0), (gloria_x + 200, gloria_y + 40), 10)
+    pygame.draw.circle(screen, (255, 0, 0), (gloria_x + 350, gloria_y + 70), 4)
+    pygame.draw.circle(screen, (255, 0, 0), (gloria_x + 500, gloria_y + 200), 7)
+    pygame.draw.circle(screen, (255, 0, 0), (gloria_x + 245, gloria_y + 200), 9)
+    pygame.draw.circle(screen, (255, 0, 0), (gloria_x + 405, gloria_y + 275), 3)
+    pygame.draw.circle(screen, (255, 0, 0), (gloria_x + 550, gloria_y + 55), 6)
+    pygame.draw.circle(screen, (255, 0, 0), (gloria_x + 72, gloria_y + 50), 5)
+    star = [
+        (gloria_x + 422, gloria_y + 86),
+        (gloria_x + 412, gloria_y + 99),
+        (gloria_x + 403, gloria_y + 107),
+        (gloria_x + 416, gloria_y + 117),
+        (gloria_x + 427, gloria_y + 139),
+        (gloria_x + 432, gloria_y + 112),
+        (gloria_x + 449, gloria_y + 104),
+        (gloria_x + 435, gloria_y + 99),
+        (gloria_x + 422, gloria_y + 85)
+    ]
+    pygame.draw.polygon(screen, (255, 0, 0), (star))
+
+    # skyscraper
+    pygame.draw.rect(screen, (255, 255, 255), (gloria_x + 35, gloria_y + 200, 50, 300))
+    pygame.draw.rect(screen, (0, 0, 0), (gloria_x + 35, gloria_y + 200, 50, 300), 5)
+
+    #windows
+
+    window1_x = gloria_x + 45
+    spacing = 10
+    number_of_bars = 5
+    width1_window = 5
+    while window1_x < (width1_window + spacing) * number_of_bars + gloria_x:
+        pygame.draw.rect(screen, (0, 0, 0), (window1_x, gloria_y + 210, width1_window, 14))
+        pygame.draw.rect(screen, (0, 0, 0), (window1_x, gloria_y + 240, width1_window, 14))
+        pygame.draw.rect(screen, (0, 0, 0), (window1_x, gloria_y + 270, width1_window, 14))
+        pygame.draw.rect(screen, (0, 0, 0), (window1_x, gloria_y + 300, width1_window, 14))
+        pygame.draw.rect(screen, (0, 0, 0), (window1_x, gloria_y + 330, width1_window, 14))
+        pygame.draw.rect(screen, (0, 0, 0), (window1_x, gloria_y + 360, width1_window, 14))
+        pygame.draw.rect(screen, (0, 0, 0), (window1_x, gloria_y + 390, width1_window, 14))
+        pygame.draw.rect(screen, (0, 0, 0), (window1_x, gloria_y + 420, width1_window, 14))
+        pygame.draw.rect(screen, (0, 0, 0), (window1_x, gloria_y + 450, width1_window, 14))
+        window1_x += spacing
+
+    #meteor crash
+    meteor_points = [
+        (gloria_x + 72, gloria_y + 217),
+        (gloria_x + 112,gloria_y + 211),
+        (gloria_x + 85, gloria_y + 208),
+        (gloria_x + 105, gloria_y + 190),
+        (gloria_x + 83, gloria_y + 199),
+        (gloria_x + 68, gloria_y + 185),
+        (gloria_x + 72, gloria_y + 201),
+        (gloria_x + 53, gloria_y + 203)
+
+    ]
+    if circle_y_gloria == gloria_y + 190:
+        crash_gloria = True
+    if crash_gloria == True:
+        pygame.draw.polygon(screen, (255, 140, 0), (meteor_points))
 
     #----------------------
     #AYDA'S REIGN OF TERROR
@@ -694,7 +797,9 @@ while running:
     #TEXT
     screen.blit(ayda_text, (x+width//2 - ayda_text.get_width()//2, y+20))
 
-
+    # -------------------------------------------------------------------------
+    x = 0
+    y = 960
 
 
     # ----------------------------------------------------------------------------------------
@@ -800,8 +905,51 @@ while running:
     screen.blit(text2, (x, y + 35))
 
     # -----------
+    # Draw the background
+    pygame.draw.rect(screen, (135, 206, 235), (x , y, WIDTH_henry, HEIGHT_henry))
+
+    # Draw the shapes
+    pygame.draw.rect(screen, (150, 75, 0), (rect_x_henry + x + x_henry, rect_y_henry + 200 + y - y_henry, 20, 20))
+    pygame.draw.circle(screen, (138, 30, 30), (circle_x_henry + x + x_henry, circle_y_henry + 200 + y - y_henry), 30)
+    pygame.draw.rect(screen, (0, 0, 0), (rect_x_henry + x + 2 + x_henry, rect_y_henry + 200 + y - 20 - y_henry, 3, 20))
+    pygame.draw.rect(screen, (0, 0, 0), (rect_x_henry + x + 15 + x_henry, rect_y_henry + + 200 + y - 20 - y_henry, 3, 20))
+    pygame.draw.circle(screen, (255, 234, 0), (circle_x_henry + x - 180, circle_y_henry - 90 + y), 50)
+    pygame.draw.rect(screen, (1, 50, 32), (x , y + 400, WIDTH_henry, HEIGHT_henry - 400))
+
+    pygame.draw.rect(screen, (150, 21, 21), (x + rect_x_henry - 10, y + rect_y_henry - 50 + 200, 50, 50))
+    pygame.draw.polygon(screen, (84, 8, 8), [(240 + x, 151 + y + 200), (260 + x, 115 + y + 200), (288 + x, 151 + y + 200)])
+    pygame.draw.rect(screen, (217, 242, 29), (244 + x, 159 + y + 200, 10, 10))
+    pygame.draw.rect(screen, (217, 242, 29), (272 + x, 159 + y + 200, 10, 10))
+    pygame.draw.rect(screen, (0, 0, 0), (258 + x, 183 + y + 200, 10, 17))
+
+    y_henry += 4
+    x_henry += 3
+
+    if y_henry >= 310:
+        y_henry = 0
+    if y_henry == 160:
+        bomb_henry = True
+    if x_henry == 15 or x_henry == 12 or x_henry == 9 or x_henry == 6:
+        x_henry-= 6
+
+    if bomb_henry and not bomb_stopped_henry:
+        pygame.draw.circle(screen, (0, 0, 0), (bomb_x_henry + x, bomb_y_henry + 190 + y + h_henry), 5)
+        h_henry += 10        
+    if h_henry >= 160 and not bomb_stopped_henry:
+        pygame.draw.circle(screen, (236, 146, 55), (x + 260, y + 400), w_henry)
+        w_henry += 4
+        bomb_henry = False
+        if w_henry >= 100:
+            bomb_stopped_henry = True
+
+    if bomb_stopped_henry:
+        h_henry = 0
+        w_henry = 1
+        x_henry = 0
+        bomb_stopped_henry = False
+    # ---------------------------------------------------------------------------
     
-    # Must have these coordinates
+    # ----------------------------------------------------------------------------------------
     x = 1920
     y = 1440
     width = 640

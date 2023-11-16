@@ -64,6 +64,17 @@ switch_maggie = "right"
 
 # ----------------------
 
+sana_monster_x = 0
+sana_monster_y = 240
+switch_sana = "right"
+
+# ----------------------
+star_x_christine = 640*5
+star_y_christine = 0
+
+switch_christine = "right"
+#--------------------------
+
 duncan_glow_x, duncan_glow_y, duncan_glow_radius = 315, 220, 70
 duncan_vignette_x, duncan_vignette_y, duncan_vignette_radius = 320, 240, 250
 
@@ -295,6 +306,24 @@ blink_rhee = False
 
 # -------------------
 
+circle_x_sebast = 200
+circle_y_sebast = 100
+river_sebast = 250
+
+random_x_sebast = random.randrange(0, 640)
+random_y_sebast = random.randrange(0, 480)
+
+plot_width_sebast = 640
+duck_behind_x = 200
+
+plot_height_sebast = 480
+
+
+building_x_sebast = 50
+count_sebast = 0
+
+#_-----------------
+
 running = True
 while running:
     # GALLO VERSE SPECIFIC ----------------------------------------------------------------
@@ -459,7 +488,105 @@ while running:
     pygame.draw.circle(screen, (255, 255, 255), (x + ghost_x_maggie - 72, y + ghost_y_maggie + 115), 5)
     pygame.draw.circle(screen, (255, 255, 255), (x + ghost_x_maggie - 50, y + ghost_y_maggie + 115), 5)
 
+    #Christine ----------------------------
+    x = 0
+    y = 0
+    width = 640
+    height = 480
 
+    points_christine = [
+        (star_x_christine + 0, star_y_christine + 45),
+        (star_x_christine + 20, star_y_christine + 45),
+        (star_x_christine + 30, star_y_christine +25),
+        (star_x_christine + 40, star_y_christine + 45),
+        (star_x_christine + 60, star_y_christine + 45),
+      
+        (star_x_christine + 45, star_y_christine + 60),
+        (star_x_christine + 55, star_y_christine + 80),
+        (star_x_christine + 30, star_y_christine +65),
+        (star_x_christine + 5, star_y_christine + 80),
+        (star_x_christine + 15, star_y_christine + 60)
+    ]
+
+    roof_points = [
+        (x+165, y+170),
+        (x+250, y+200),
+        (x+485, y+170)
+    ]
+    
+    if star_x_christine > 640:
+        switch_christine = "left"
+    elif star_x_christine < 0:
+        switch_christine = "right"
+
+    if switch_christine == "right":
+        star_x_christine += 3
+    else:
+        star_x_christine -=3
+
+    #Background
+    pygame.draw.rect(screen, (152,245,255), (x, y, width, height))
+
+    #Rain?
+    for i in range(30):
+        pygame.draw.circle(screen, (255,187,255), (x+40, y+50+20*i), 3)
+        pygame.draw.circle(screen, (255,187,255), (x+90, y+50+20*i), 3)
+        pygame.draw.circle(screen, (221,160,221), (x+570, y+50+20*i), 3)
+        pygame.draw.circle(screen, (221,160,221), (x+60, y+50+20*i), 3)
+        pygame.draw.circle(screen, (255,187,255), (x+620, y+50+20*i), 3)
+        pygame.draw.circle(screen, (255,187,255), (x+530, y+50+20*i), 3)
+
+    #Clouds
+    pygame.draw.circle(screen, (255,225,255), (x+160, y+350), 35)
+    pygame.draw.circle(screen, (255,225,255), (x+200, y+350), 45)
+    pygame.draw.circle(screen, (255,225,255), (x+260, y+350), 65)
+    pygame.draw.circle(screen, (255,225,255), (x+300, y+350), 60)
+    pygame.draw.circle(screen, (255,225,255), (x+320, y+350), 65)
+    pygame.draw.circle(screen, (255,225,255), (x+360, y+350), 50)
+    pygame.draw.circle(screen, (255,225,255), (x+400, y+350), 65)
+    pygame.draw.circle(screen, (255,225,255), (x+460, y+350), 45)
+    pygame.draw.circle(screen, (255,225,255), (x+500, y+350), 35)
+
+    for i in range(5):
+        pygame.draw.circle(screen, (216,191,216), (x+0+45*i, y+50), 40)
+        pygame.draw.circle(screen, (255,225,255), (x+140+35*i, y+80), 35)
+
+    for i in range(3):
+        pygame.draw.circle(screen, (216,191,216), (x+530+45*i, y+80), 40)
+    for i in range(2):
+        pygame.draw.circle(screen, (255,225,255), (x+0+45*i, y+200), 40)
+
+    #House
+    pygame.draw.rect(screen, (255,182,193), (x+165, y+170, 320, 160))
+
+    #Outline
+    pygame.draw.line(screen, (171,130,255), (x+250, y+200), (x+250, y+350), width=2)
+    pygame.draw.line(screen, (171,130,255), (x+165, y+170), (x+165, y+340), width=2)
+    pygame.draw.line(screen, (171,130,255), (x+485, y+170), (x+485, y+350), width=2)
+    
+    #Windows
+    pygame.draw.line(screen, (171,130,255), (x+265, y+235), (x+470, y+210), width=30)    
+    pygame.draw.line(screen, (171,130,255), (x+190, y+215), (x+220, y+225), width=30)    
+    pygame.draw.line(screen, (171,130,255), (x+190, y+275), (x+220, y+285), width=30) 
+    pygame.draw.line(screen, (171,130,255), (x+265, y+290), (x+470, y+270), width=30) 
+       
+    #Roof
+    pygame.draw.polygon(screen, (171,130,255), roof_points)
+    
+    #Candle
+    pygame.draw.rect(screen, (75,0,130), (x+245, y+140, 10, 50))
+    pygame.draw.circle(screen, (255,215,0), (x+250, y+140), 10)
+
+    #Clouds
+    pygame.draw.circle(screen, (255,225,255), (x+320, y+350), 40)
+    pygame.draw.circle(screen, (255,225,255), (x+260, y+345), 30)
+    pygame.draw.circle(screen, (255,225,255), (x+200, y+350), 40)
+    pygame.draw.circle(screen, (255,225,255), (x+450, y+350), 45)
+    
+    #Star
+    pygame.draw.polygon(screen, (255,215,0), points_christine)
+
+    
     # DUNCAN -------------------------------
 
     x = 3200
@@ -749,6 +876,62 @@ while running:
     if leaves_x_ocampo == -100: 
         bark_x_ocampo = 640 
         leaves_x_ocampo = 695
+   
+    # SANA ----------------------------------------------------------------------------------------
+
+    x = 6 * 640
+    y = 0
+    width = 640
+    height = 480
+
+    if sana_monster_x > 640:
+        switch_sana = "left"
+    elif sana_monster_x < 0:
+        switch_sana = "right"
+
+    if switch_sana == "right":
+        sana_monster_x += 3
+    else:
+        sana_monster_x -=3
+    
+    
+
+    # Rather than screen.fill, draw a rectangle
+    pygame.draw.rect(screen, (205,129,98), (x, y, width, height))
+
+    # Must draw with reference to that coordinate
+    #chocolate chips
+    pygame.draw.circle(screen, (94,38,18), (x + 100, y + 100), 20)
+    pygame.draw.circle(screen, (94,38,18), (x + 400, y + 50), 20)
+    pygame.draw.circle(screen, (94,38,18), (x + 300, y + 200), 20)
+    pygame.draw.circle(screen, (94,38,18), (x + 200, y + 370), 20)
+    pygame.draw.circle(screen, (94,38,18), (x + 580, y + 320), 20)
+    #sprinkles
+    pygame.draw.line(screen, (255,48,48), (x + 60, y + 300), (x + 100, y + 380), width = 10) #red
+    pygame.draw.line(screen, (125,38,205), (x + 330, y + 340), (x + 360, y + 270), width = 10) #periwinkle
+    pygame.draw.line(screen, (255,62,150), (x + 455, y + 460), (x + 430, y + 390), width = 10) #pink
+    pygame.draw.line(screen, (10,245,255), (x + 420, y + 90), (x + 500, y + 80), width = 10) #cyan
+    pygame.draw.rect(screen, (255,236,139), (x + 30, y + 50, 10, 80)) #yellow
+    pygame.draw.rect(screen, (152,251,152), (x + 530, y + 390, 80, 10)) #green
+    pygame.draw.line(screen, (255,0,255), (x + 190, y + 120), (x + 270, y + 150), width = 10) #purple
+
+    #cookie crumbs loop
+    for i in range(18):
+        pygame.draw.circle(screen, (255,211,155), (x + i*40, 250), 5)
+        
+
+    #cookie monster animation
+    #face
+    pygame.draw.circle(screen, (1,161,201), (x + sana_monster_x, y + sana_monster_y), 45)
+    #mouth
+    pygame.draw.ellipse(screen, (0, 0, 0), (x + sana_monster_x - 5, y + sana_monster_y, 40, 25))
+    #eyes
+    pygame.draw.circle(screen, (255, 255, 255), (x + sana_monster_x + 25, y + sana_monster_y - 40), 17)
+    pygame.draw.circle(screen, (255, 255, 255), (x + sana_monster_x - 15, y + sana_monster_y - 40), 17)
+    #pupils
+    pygame.draw.circle(screen, (0,0,0), (x + sana_monster_x + 22, y + sana_monster_y - 43), 8)
+    pygame.draw.circle(screen, (0,0,0), (x + sana_monster_x - 12, y + sana_monster_y - 37), 8)
+
 
     #Jaden Lam-------------------------------------------------------------------------------
     x = 640 * 4
@@ -796,6 +979,84 @@ while running:
     
     #Space Ship
     pygame.draw.polygon(screen, (tri_r_lam, tri_g_lam, tri_b_lam), [(x+tri_x_lam, y+tri_y_lam+150), (x+tri_x_lam, y+tri_y_lam+200), (x+tri_x_lam+100, y+tri_y_lam+175)])
+
+     # -----------------------------------------Joakim start
+
+    # DRAWING
+    # Must have these coordinates
+    x = 1280
+    y = 480
+    width = 640
+    height = 480
+
+
+     # sky
+    pygame.draw.rect(screen, (70, 200, 225), (x, y, plot_width_sebast, plot_height_sebast))
+    #grass
+    pygame.draw.rect(screen, (10, 225, 155), (x, y + plot_height_sebast /2 + 50, plot_width_sebast, plot_height_sebast/6)) 
+
+    # Must draw with reference to that coordinate
+    #river
+    pygame.draw.rect(screen, (0, 155, 255), (x, y + plot_height_sebast - 140, plot_width_sebast, plot_height_sebast/4)) 
+
+    #   Chimney
+    pygame.draw.rect(screen, (0, 0, 0), (x + 200, y + 50, 30, 150))
+    #building 
+    pygame.draw.rect(screen, (60, 60, 90), (x + 150, y + 150, 400, 150))
+    # roof
+    pygame.draw.polygon(screen, (72, 54, 41), ( (x +  100, y + 150), (x  + 330, y + 70), (x + 600, y + 150) ))
+
+    # duck
+    #duck body
+    pygame.draw.ellipse(screen, (225, 225, 0), (x + circle_x_sebast, y + circle_y_sebast + river_sebast, 100, 60), 30)
+    #river on duck
+    pygame.draw.ellipse(screen, (0, 155, 225), (x + circle_x_sebast - 10, y + circle_y_sebast + 35 + river_sebast, 130, 60), 30)
+
+    #duck head
+    pygame.draw.circle(screen, (225, 225, 0), (x + circle_x_sebast + 85, y + circle_y_sebast - 5 + river_sebast), 20)
+
+    #duck eye
+    pygame.draw.circle(screen, (0, 0, 0), (x + circle_x_sebast + 80, y + circle_y_sebast - 15 + river_sebast ), 3)
+
+    #duck beak
+    pygame.draw.rect(screen, (225, 100, 0), (x + circle_x_sebast + 90, y + circle_y_sebast - 5 + river_sebast, 17, 5), 10)  
+
+    #duck body
+    pygame.draw.ellipse(screen, (225, 200, 0), (x + circle_x_sebast - duck_behind_x, y + circle_y_sebast + river_sebast, 100, 60), 30)
+
+    #river on duck
+    pygame.draw.ellipse(screen, (0, 155, 225), (x + circle_x_sebast - duck_behind_x - 10, y + circle_y_sebast + 35 + river_sebast, 130, 60), 30)
+
+    #duck head
+    pygame.draw.circle(screen, (225, 200, 0), (x + circle_x_sebast + 85 - duck_behind_x, y + circle_y_sebast - 5 + river_sebast), 20)
+
+    #duck eye
+    pygame.draw.circle(screen, (0, 0, 0), (x + circle_x_sebast + 80 - duck_behind_x, y + circle_y_sebast - 15 + river_sebast ), 3)
+
+    #duck beak
+    pygame.draw.rect(screen, (225, 100, 0), (x + circle_x_sebast + 90 - duck_behind_x, y + circle_y_sebast - 5 + river_sebast, 17, 5), 10)  
+
+    if circle_x_sebast < plot_width_sebast - 150:
+      circle_x_sebast += 1
+    else:
+      circle_x_sebast = 100
+
+    while building_x_sebast < 600:
+      building_x_sebast += 100
+
+
+    random_x_sebast = random.randrange(0, 640)
+    random_y_sebast = random.randrange(0, 480)
+
+
+    if count_sebast % 3 == 0:
+      pygame.draw.rect(screen, (90, 150, 255), (x + random_x_sebast, y + random_y_sebast, 2, 30)) 
+
+    count_sebast += 1
+
+    #------- Joakim end
+
+
     
     # Christian -------------------------------------------------------------------------------------
     x = 3840
@@ -1129,6 +1390,7 @@ while running:
     
     # ----------------------------------------------------------------------------------------
 
+    # ---------------------------------------------------------------------------------------------
     # Must have these coordinates
     x = 1920
     y = 1440
