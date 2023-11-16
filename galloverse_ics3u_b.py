@@ -66,6 +66,13 @@ rect_y_michael = 20
 michael_frames_1 = 0
 michael_frames_2 = 0
 
+# ------------------
+
+x_tank_ethan = 0
+y_tank_ethan = 1714
+velocity_x = 1
+exploded = False
+random_ethan = random.randrange(1, 1000)
 
 # ------------------
 
@@ -257,6 +264,7 @@ while running:
             screen.blit(coord_text, (x, y))
     # --------------------------
         # GAME STATE UPDATES
+    
     if daniel_action_selection is True:
         daniel_blink_or_scan = random.randint(1, 100)
         if daniel_blink_or_scan % 2 == 0:
@@ -764,6 +772,7 @@ while running:
     if circle_y_gloria <= gloria_y + 190:
         circle_x_gloria += 1
         circle_y_gloria += 2
+    print(gloria_frames)
     gloria_frames += 1
     if gloria_frames % 130 == 0:
         circle_y_gloria = gloria_y
@@ -924,7 +933,56 @@ while running:
         x_henry = 0
         bomb_stopped_henry = False
     # ---------------------------------------------------------------------------
+
+    if x_tank_ethan >= 300:
+            velocity_x -= 0.3
+        else:
+            velocity_x += 0.3
+
+        x_tank_ethan += velocity_x
+
+        # DRAWING
+    # Must have these coordinates
+    x = 0
+    y = 480 * 4
+    width = 640
+    height = 480
+    random_ethan = random.randint(1, 1000)
+
+    x = 0
+    spacing = 10
+    number_of_bars = 28
+    width = 10
+    height = 215
+    while x < (width + spacing) * number_of_bars:
+        pygame.draw.rect(screen, (212, 185, 150) , (x, height, width, 35))
+        x += width + spacing
+
+    pygame.draw.rect(screen, (212, 185, 150), (10, height + 10, 1000, 10))
     
+    pygame.draw.ellipse(screen,(0, 0, 0), (x_tank_ethan - 9, y_tank_ethan + 28, 110, 35))
+    pygame.draw.rect(screen, (0, 0, 255), (x_tank_ethan + 7, y_tank_ethan, 85, 30))
+    pygame.draw.rect(screen, (0, 0, 0), (x_tank_ethan + 20, y_tank_ethan - 20, 50, 20))
+    pygame.draw.rect(screen, (0, 0, 0), (x_tank_ethan + 55, y_tank_ethan - 18, 50, 15))
+
+    # ---------------------------------------------------------------------------
+
+    # Rather than screen.fill, draw a rectangle
+    pygame.draw.rect(screen, (220, 220, 220), (0, 0, 1000, 1000))
+    pygame.draw.rect(screen, (193, 154, 107), (0, 0, 1000, 1000))
+    pygame.draw.rect(screen, (101, 116, 50), (0, 250, 1100, 100))
+
+    # Must draw with reference to that coordinate
+    for x in range(1):
+        pygame.time.wait(10)
+        pygame.draw.circle(screen, "red", (x_tank_ethan + random_ethan, y_tank_ethan - random_ethan), 100)
+        pygame.draw.circle(screen, "orange", (x_tank_ethan + random_ethan, y_tank_ethan - random_ethan), 85)
+    
+    pygame.draw.ellipse(screen,(0, 0, 0), (x_tank_ethan - 9, y_tank_ethan + 28, 110, 35))
+    pygame.draw.rect(screen, (0, 0, 255), (x_tank_ethan + 7, y_tank_ethan, 85, 30))
+    pygame.draw.rect(screen, (0, 0, 0), (x_tank_ethan + 20, y_tank_ethan - 20, 50, 20))
+    pygame.draw.rect(screen, (0, 0, 0), (x_tank_ethan + 55, y_tank_ethan - 18, 50, 15))
+
     # ----------------------------------------------------------------------------------------
     x = 1920
     y = 1440
