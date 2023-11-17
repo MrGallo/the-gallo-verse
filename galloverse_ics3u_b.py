@@ -198,7 +198,23 @@ ayda_text = ayda_font.render("I HAVE THE HIGH GROUND.", True, AYDA_RED, AYDA_SKY
 ayda_textRect = ayda_text.get_rect()
 ayda_textRect.topleft = (WIDTH // 2, HEIGHT // 2)
 # ------------------
+# Initialize global variables for animation
+x = 1920
+y = 960
+rec_x_Andres = 400
+rec_y_Andres = 400
+tree_trunk_width = 50
+tree_trunk_height = 200
+circle_x_Andres = 325
+circle_y_Andres = 275
 
+# Initial sun position
+sun_x_Andres = 580
+sun_y_Andres = 60
+sun_radius_Andres = 50
+
+# Sun movement speed
+sun_speed_Andres = 2
 # ---------------------
 circle_x_adeline = 500 
 circle_y_adeline = 80 
@@ -923,6 +939,22 @@ while running:
         w_henry = 1
         x_henry = 0
         bomb_stopped_henry = False
+    # ---------------------------------------------------------------------------
+    # Set the width and height of your window
+    WIDTH = 640 
+    HEIGHT = 480
+
+    # Update the sun position
+    sun_x_Andres -= sun_speed_Andres
+
+    # If the sun goes off the screen to the left, reset its position to the right
+    if sun_x_Andres + sun_radius_Andres < 0:
+        sun_x_Andres = WIDTH + sun_radius_Andres
+
+    # Draw the scene
+    pygame.draw.rect(screen, (139, 69, 19), (rec_x_Andres, rec_y_Andres, tree_trunk_width, tree_trunk_height))  # Tree trunk
+    pygame.draw.circle(screen, (0, 128, 0), (x + circle_x_Andres, y + circle_y_Andres), 75)  # Tree canopy
+    pygame.draw.circle(screen, (255, 255, 0), (x + sun_x_Andres, y + sun_y_Andres), sun_radius_Andres)  # Sun
     # ---------------------------------------------------------------------------
     x = 640 * 5 
     y = 480 * 1 
