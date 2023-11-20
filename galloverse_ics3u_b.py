@@ -2,6 +2,7 @@
 import math
 import random
 import pygame
+import time
 
 def linear_interpolation(x, x0, x1, y0, y1):
     return y0 + (x - x0) * (y1 - y0) / (x1 - x0)
@@ -83,8 +84,10 @@ oscar_shell_v_x = 80
 oscar_shell_v_y = oscar_shell_v_y_original
 
 oscar_shell_fired = False
-oscar_exploded = False
 oscar_player_controlled = False
+oscar_spawned_explosions = {}
+oscar_explosion_duration = 3000
+oscar_last_auto_fire = 0
 
 # -------------------
 ryan_x = 0
@@ -401,91 +404,7 @@ while running:
     pygame.draw.ellipse(screen, (255,255, 255), (ryan_x + 560, ryan_y + 227.5, 25, 25))
 
     #-------------
-    # DRAWING
-    # Must have these coordinates
-    x = 640 * 2
-    y = 480 * 4
-    width = 640
-    height = 480
-    font = pygame.font.Font('freesansbold.ttf', 32)
-    font2 = pygame.font.Font('freesansbold.ttf', 100)
-
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        oscar_player_controlled = True
-        tank_x_oscar -= 5
-    if keys[pygame.K_RIGHT]:
-        oscar_player_controlled = True
-        tank_x_oscar += 5
-    if keys[pygame.K_UP]:
-        oscar_player_controlled = True
-        tank_y_oscar -= 5
-    if keys[pygame.K_DOWN]:
-        oscar_player_controlled = True
-        tank_y_oscar += 5
-    if keys[pygame.K_SPACE]:
-        oscar_player_controlled = True
-        oscar_shell_fired = True
-        oscar_exploded = False
-    if keys[pygame.K_r]:
-        oscar_player_controlled = True
-        oscar_shell_fired = False
-        oscar_exploded = False
-    if keys[pygame.K_b] and oscar_shell_fired:
-        oscar_player_controlled = True
-        oscar_shell_fired = False
-        oscar_exploded = (oscar_shell_x + x + tank_x_oscar, oscar_shell_y + y + tank_y_oscar)
-
-    if oscar_shell_fired:
-        oscar_shell_x += oscar_shell_v_x
-        # inverted
-        oscar_shell_y -= oscar_shell_v_y
-        oscar_shell_v_y -= 2
-    else:
-        oscar_shell_x = oscar_shell_x_offset + x
-        oscar_shell_y = oscar_shell_y_offset + y
-        oscar_shell_v_y = oscar_shell_v_y_original
-
-    if not oscar_player_controlled:
-        tank_x_oscar += random.randint(-5, 5)
-        tank_y_oscar += random.randint(-5, 5)
-
-    # Rather than screen.fill, draw a rectangle
-    pygame.draw.rect(screen, (255, 255, 255), (x, y, width, height))
-
-    # Drawings
-    tank = pygame.draw.polygon(screen, (0, 0, 0),
-                               [(x + tank_x_oscar + 29, y + tank_y_oscar + 383),
-                                (x + tank_x_oscar + 54, y + tank_y_oscar + 449),
-                                (x + tank_x_oscar + 184, y + tank_y_oscar + 453),
-                                (x + tank_x_oscar + 218, y + tank_y_oscar + 384)])
-    pygame.draw.polygon(screen, (0, 0, 0),
-                        [(x + tank_x_oscar + 53, y + tank_y_oscar + 369),
-                         (x + tank_x_oscar + 184, y + tank_y_oscar + 369),
-                         (x + tank_x_oscar + 170, y + tank_y_oscar + 326),
-                         (x + tank_x_oscar + 68, y + tank_y_oscar + 326)])
-    pygame.draw.polygon(screen, (0, 0, 0),
-                        [(x + tank_x_oscar + 172, y + tank_y_oscar + 334),
-                         (x + tank_x_oscar + 338, y + tank_y_oscar + 330),
-                         (x + tank_x_oscar + 333, y + tank_y_oscar + 346),
-                         (x + tank_x_oscar + 177, y + tank_y_oscar + 353)])
-    pygame.draw.circle(screen, (255, 255, 255), (79 + tank_x_oscar + x, 420 + tank_y_oscar + y), 25)
-    pygame.draw.circle(screen, (255, 255, 255), (151 + tank_x_oscar + x, 420 + tank_y_oscar + y), 25)
-
-    if oscar_shell_fired:
-        pygame.draw.circle(screen, (23, 25, 79), (x + tank_x_oscar + oscar_shell_x, y + tank_y_oscar + oscar_shell_y),
-                           25)
-    if oscar_exploded:
-        pygame.draw.circle(screen, (181, 114, 27), oscar_exploded, random.randint(50, 60))
-        bombtext = font2.render('OSCAR WAS HERE', True, (0, 0, 0))
-        screen.blit(bombtext, (oscar_exploded[0], oscar_exploded[1] - 200))
-
-    text = font.render('Oscar\'s Tile: U/D/L/R = arrow keys', True, (0, 0, 0))
-    text2 = font.render('Fire = SPACE | Reset = R | Detonate = B', True, (0, 0, 0))
-    screen.blit(text, (x, y))
-    screen.blit(text2, (x, y + 35))
     
-    # -----------
     x = 1280
     y = 960
     width = 640
@@ -881,6 +800,110 @@ while running:
     x = 0
     y = 960
 
+
+    # ----------------------------------------------------------------------------------------
+
+    
+    # ------------- TANK. HAS TO BE AT THE BOTTOM!
+    # DRAWING
+    x = 640 * 2
+    y = 480 * 3
+    width = 640
+    height = 480
+    font = pygame.font.Font('freesansbold.ttf', 32)
+    font2 = pygame.font.Font('freesansbold.ttf', 100)
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        oscar_player_controlled = True
+        tank_x_oscar -= 5
+    if keys[pygame.K_RIGHT]:
+        oscar_player_controlled = True
+        tank_x_oscar += 5
+    if keys[pygame.K_UP]:
+        oscar_player_controlled = True
+        tank_y_oscar -= 5
+    if keys[pygame.K_DOWN]:
+        oscar_player_controlled = True
+        tank_y_oscar += 5
+    if keys[pygame.K_SPACE]:
+        oscar_player_controlled = True
+        oscar_shell_fired = True
+        oscar_exploded = False
+    if keys[pygame.K_r]:
+        oscar_player_controlled = True
+        oscar_shell_fired = False
+        oscar_exploded = False
+    if keys[pygame.K_b] and oscar_shell_fired:
+        oscar_player_controlled = True
+        oscar_shell_fired = False
+        oscar_spawned_explosions[(oscar_shell_x, oscar_shell_y)] = math.floor(time.time() * 1000)
+
+    if oscar_shell_fired:
+        oscar_shell_x += oscar_shell_v_x
+        # inverted
+        oscar_shell_y -= oscar_shell_v_y
+        oscar_shell_v_y -= 2
+    else:
+        oscar_shell_x = oscar_shell_x_offset + x + tank_x_oscar
+        oscar_shell_y = oscar_shell_y_offset + y + tank_y_oscar
+        oscar_shell_v_y = oscar_shell_v_y_original
+
+    if not oscar_player_controlled:
+        tank_x_oscar += random.randint(-5, 5)
+        tank_y_oscar += random.randint(-5, 5)
+        if random.random() > 0.99 and not oscar_shell_fired:
+            oscar_shell_fired = True
+            oscar_last_auto_fire = time.time()
+        if oscar_shell_fired and time.time() - oscar_last_auto_fire >= random.random():
+            oscar_spawned_explosions[(oscar_shell_x, oscar_shell_y)] = math.floor(time.time() * 1000)
+            oscar_shell_fired = False
+
+    # Rather than screen.fill, draw a rectangle
+    pygame.draw.rect(screen, (255, 255, 255), (x, y, width, height))
+
+    # Drawings
+    tank = pygame.draw.polygon(screen, (0, 0, 0),
+                               [(x + tank_x_oscar + 29, y + tank_y_oscar + 383),
+                                (x + tank_x_oscar + 54, y + tank_y_oscar + 449),
+                                (x + tank_x_oscar + 184, y + tank_y_oscar + 453),
+                                (x + tank_x_oscar + 218, y + tank_y_oscar + 384)])
+    pygame.draw.polygon(screen, (0, 0, 0),
+                        [(x + tank_x_oscar + 53, y + tank_y_oscar + 369),
+                         (x + tank_x_oscar + 184, y + tank_y_oscar + 369),
+                         (x + tank_x_oscar + 170, y + tank_y_oscar + 326),
+                         (x + tank_x_oscar + 68, y + tank_y_oscar + 326)])
+    pygame.draw.polygon(screen, (0, 0, 0),
+                        [(x + tank_x_oscar + 172, y + tank_y_oscar + 334),
+                         (x + tank_x_oscar + 338, y + tank_y_oscar + 330),
+                         (x + tank_x_oscar + 333, y + tank_y_oscar + 346),
+                         (x + tank_x_oscar + 177, y + tank_y_oscar + 353)])
+    pygame.draw.circle(screen, (255, 255, 255), (79 + tank_x_oscar + x, 420 + tank_y_oscar + y), 25)
+    pygame.draw.circle(screen, (255, 255, 255), (151 + tank_x_oscar + x, 420 + tank_y_oscar + y), 25)
+
+    if oscar_shell_fired:
+        pygame.draw.circle(screen, (23, 25, 79), (oscar_shell_x, oscar_shell_y),
+                           25)
+
+    to_be_erased = []
+
+    for explosion in oscar_spawned_explosions:
+        if math.floor(time.time() * 1000) - oscar_spawned_explosions[explosion] > oscar_explosion_duration:
+            to_be_erased.append(explosion)
+            continue
+        pygame.draw.circle(screen, (181, 114, 27), explosion, random.randint(50, 60))
+        bombtext = font2.render('OSCAR WAS HERE', True, (0, 0, 0))
+        screen.blit(bombtext, (explosion[0], explosion[1] - 200))
+
+    for erase in to_be_erased:
+        del oscar_spawned_explosions[erase]
+
+    text = font.render('Oscar\'s Tile: U/D/L/R = arrow keys', True, (0, 0, 0))
+    text2 = font.render('Fire = SPACE | Reset = R | Detonate = B', True, (0, 0, 0))
+    screen.blit(text, (x, y))
+    screen.blit(text2, (x, y + 35))
+
+    # -----------
     # Draw the background
     pygame.draw.rect(screen, (135, 206, 235), (x , y, WIDTH_henry, HEIGHT_henry))
 
