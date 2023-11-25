@@ -75,6 +75,14 @@ star_y_christine = 0
 switch_christine = "right"
 #--------------------------
 
+
+rectangle_x_ethan = 100
+rectangle_y_ethan = 0
+Brown = (156,102,31)
+Light_Blue = (191,239,255)
+
+#-----------------------------
+
 duncan_glow_x, duncan_glow_y, duncan_glow_radius = 315, 220, 70
 duncan_vignette_x, duncan_vignette_y, duncan_vignette_radius = 320, 240, 250
 
@@ -979,7 +987,36 @@ while running:
     
     #Space Ship
     pygame.draw.polygon(screen, (tri_r_lam, tri_g_lam, tri_b_lam), [(x+tri_x_lam, y+tri_y_lam+150), (x+tri_x_lam, y+tri_y_lam+200), (x+tri_x_lam+100, y+tri_y_lam+175)])
+    # --------------------------------------- Ethan Start
 
+
+    x = 640
+    y = 0
+    width = 640
+    height = 480
+
+    if rectangle_x_ethan < width:
+        rectangle_x_ethan += 1
+    else:
+        rectangle_x_ethan = 0
+
+    pygame.draw.rect(screen, (Brown), (x, y, width, height))
+    pygame.draw.rect(screen, (Light_Blue), (x, y,width, height - 225))
+
+
+
+    pygame.draw.rect(screen, (255,99,71), (x + rectangle_x_ethan - 50, y + 90, 60, 130))
+    pygame.draw.rect(screen, (255,99,71), (x + rectangle_x_ethan - 20 , y + 80, 90, 25))
+    pygame.draw.rect(screen, (255, 255, 255), (x + rectangle_x_ethan + 20  , y + 85, 10 , 10))
+    pygame.draw.polygon(screen, (0, 0, 0), ((x + rectangle_x_ethan + 15,y+105),(x + rectangle_x_ethan + 35,y+105),(x + rectangle_x_ethan + 25,y+125)))
+    pygame.draw.polygon(screen, (0, 0, 0), ((x + rectangle_x_ethan + 48,y+105),(x + rectangle_x_ethan + 68, y+105),(x + rectangle_x_ethan + 58,y+125)))
+    pygame.draw.rect(screen, (255,99,71), (x + rectangle_x_ethan - 40, y + 220, 10, 30))
+    pygame.draw.rect(screen, (255,99,71), (x + rectangle_x_ethan - 10, y + 220, 10, 30))
+    pygame.draw.rect(screen, (0,0,0), (x + rectangle_x_ethan - 40, y + 250, 10, 5))
+    pygame.draw.rect(screen, (0,0,0), (x + rectangle_x_ethan - 10, y + 250, 10, 5))
+    pygame.draw.rect(screen, (255,99,71), (x + rectangle_x_ethan -100, y + 190, 60, 15))
+    pygame.draw.rect(screen, (0,0,0), (x + rectangle_x_ethan -115, y + 190, 20, 15))
+    # ------------------------------------------Ethan Wang end
      # -----------------------------------------Joakim start
 
     # DRAWING
